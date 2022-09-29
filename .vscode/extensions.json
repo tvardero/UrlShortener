@@ -1,0 +1,9 @@
+{
+    "recommendations": [
+        "adrianwilczynski.user-secrets",
+        "eamodio.gitlens",
+        "patcx.vscode-nuget-gallery",
+        "fernandoescolar.vscode-solution-explorer",
+        "ms-dotnettools.csharp"
+    ]
+}

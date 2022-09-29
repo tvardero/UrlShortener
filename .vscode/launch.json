@@ -1,0 +1,44 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Core Attach",
+            "type": "coreclr",
+            "request": "attach"
+        },
+        {
+            "name": "Development",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build run",
+            "program": "${workspaceFolder}/UrlShortener.MVC/bin/Debug/net6.0/UrlShortener.MVC.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/UrlShortener.MVC",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            },
+            "console": "integratedTerminal"
+        },
+        {
+            "name": "Production",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build release",
+            "program": "${workspaceFolder}/UrlShortener.MVC/bin/Debug/net6.0/UrlShortener.MVC.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/UrlShortener.MVC",
+            "stopAtEntry": false,
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Production"
+            },
+            "sourceFileMap": {
+                "/Views": "${workspaceFolder}/Views"
+            },
+            "console": "integratedTerminal"
+        }
+    ]
+}

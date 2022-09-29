@@ -1,0 +1,10 @@
+{
+  "name": "urlshortener",
+  "version": "1.0.0",
+  "main": "Program.cs",
+  "author": "tvardero@gmail.com",
+  "license": "MIT",
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.2.0"
+  }
+}

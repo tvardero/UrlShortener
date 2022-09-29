@@ -1,0 +1,230 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build run",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/UrlShortener.Mvc/UrlShortener.Mvc.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": [
+                "$msCompile",
+                "$tsc"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "build release",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/UrlShortener.Mvc/UrlShortener.Mvc.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary",
+                "--configuration",
+                "Release"
+            ],
+            "problemMatcher": [
+                "$msCompile",
+                "$tsc"
+            ],
+            "group": "build"
+        },
+        {
+            "label": "build all",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "${workspaceFolder}/UrlShortener.sln",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary"
+            ],
+            "problemMatcher": [
+                "$msCompile",
+                "$tsc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "dependsOn": "yarn"
+        },
+        {
+            "label": "clean",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "clean",
+                "${workspaceFolder}/UrlShortener.sln"
+            ],
+            "problemMatcher": [],
+        },
+        {
+            "label": "publish",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "publish",
+                "${workspaceFolder}/UrlShortener.Mvc/UrlShortener.Mvc.csproj",
+                "/property:GenerateFullPaths=true",
+                "/consoleloggerparameters:NoSummary",
+                "--no-build"
+            ],
+            "problemMatcher": [],
+            "dependsOn": [
+                "clean",
+                "build all"
+            ],
+            "dependsOrder": "sequence"
+        },
+        {
+            "label": "watch",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "watch",
+                "run",
+                "--project",
+                "${workspaceFolder}/UrlShortener.Mvc/UrlShortener.Mvc.csproj",
+                "--no-build"
+            ],
+            "problemMatcher": [],
+            "dependsOn": "build run"
+        },
+        {
+            "label": "test",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "test",
+                "${workspaceFolder}/UrlShortener.sln",
+                "--no-build"
+            ],
+            "problemMatcher": [],
+            "dependsOn": "build all",
+            "group": {
+                "kind": "test",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "migrations add",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "ef",
+                "migrations",
+                "add",
+                "${input:migrationName}",
+                "--project",
+                "${workspaceFolder}/UrlShortener.DataAccess",
+                "--startup-project",
+                "${workspaceFolder}/UrlShortener.Mvc",
+                "--no-build"
+            ],
+            "problemMatcher": [],
+            "dependsOn": "build run",
+            "dependsOrder": "sequence"
+        },
+        {
+            "label": "migrations remove",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "ef",
+                "migrations",
+                "remove",
+                "--project",
+                "${workspaceFolder}/UrlShortener.DataAccess",
+                "--startup-project",
+                "${workspaceFolder}/UrlShortener.Mvc",
+                "--no-build"
+            ],
+            "problemMatcher": [],
+            "dependsOn": "build run",
+        },
+        {
+            "label": "database update latest",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "ef",
+                "database",
+                "update",
+                "--project",
+                "${workspaceFolder}/UrlShortener.DataAccess",
+                "--startup-project",
+                "${workspaceFolder}/UrlShortener.Mvc",
+                "--no-build"
+            ],
+            "problemMatcher": [],
+            "dependsOn": "build run",
+        },
+        {
+            "label": "database revert to",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "ef",
+                "database",
+                "update",
+                "${input:migrationName}",
+                "--project",
+                "${workspaceFolder}/UrlShortener.DataAccess",
+                "--startup-project",
+                "${workspaceFolder}/UrlShortener.Mvc",
+                "--no-build"
+            ],
+            "problemMatcher": [],
+            "dependsOn": "build run",
+        },
+        {
+            "label": "database update to migration",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "ef",
+                "database",
+                "update",
+                "${input:migrationName}",
+                "--project",
+                "${workspaceFolder}/UrlShortener.DataAccess",
+                "--startup-project",
+                "${workspaceFolder}/UrlShortener.Mvc",
+                "--no-build"
+            ],
+            "problemMatcher": [],
+            "dependsOn": "build run",
+        },
+        {
+            "label": "database drop",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "ef",
+                "database",
+                "drop",
+                "--project",
+                "${workspaceFolder}/UrlShortener.DataAccess",
+                "--startup-project",
+                "${workspaceFolder}/UrlShortener.Mvc",
+                "--no-build"
+            ],
+            "problemMatcher": [],
+            "dependsOn": "build run",
+        }
+    ],
+    "inputs": [
+        {
+            "id": "migrationName",
+            "type": "promptString",
+            "description": "Migration name"
+        }
+    ]
+}
