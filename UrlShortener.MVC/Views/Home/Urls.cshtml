@@ -1,4 +1,48 @@
+@using Microsoft.AspNetCore.Identity
+@model PaginableModel<UrlModel>
+@inject UserManager<User> userManager
+
 @{
-    ViewData["Title"] = "Urls";
+  ViewData["Title"] = "Urls";
+  var user = await userManager.GetUserAsync(User);
+  bool isAuthenticated = user != null;
 }
-urls
+  <div class="card mt-5 mx-auto" style="max-width: 800px">
+    <div class="card-body">
+    @if (isAuthenticated)
+    {
+        <a class="btn btn-success m-3" href="@Url.Action("CreateNewUrl")">Add new Url</a>
+    }
+      <table class="table table-hover">
+        <thead>
+          <th>Link</th>
+          <th>Destination</th>
+          <th>Created at</th>
+          <th>Expired at</th>
+          <th>Created by</th>
+          <th>Actions</th>
+        </thead>
+        <tbody>
+        @foreach (var u in Model.Entities)
+        {
+            <tr>
+              <td><a asp-controller="Redirect" asp-action="RedirectToDestination" asp-route-hash="@u.Hash">@u.Hash</a></td>
+              <td class="text-wrap">@u.DestinationUrl</td>
+              <td>@u.CreatedAtUtc.ToLocalTime()</td>
+              <td>@u.ExpiredAtUtc.ToLocalTime()</td>
+              <td>@u.Username</td>
+              <td>
+                @if (u.CanDelete)
+                {
+                  <form method="post" asp-action="DeleteUrl">
+                    <input hidden name="hash" value="@u.Hash" />
+                    <button type="submit" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></button>
+                  </form>
+                }
+              </td>
+            </tr>
+        }
+      </tbody>
+      </table>
+      </div>
+      </div>

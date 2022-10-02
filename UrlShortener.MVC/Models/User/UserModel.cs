@@ -2,6 +2,9 @@ namespace UrlShortener.MVC.Models;
 
 public class UserModel
 {
+    [HiddenInput]
+    public Guid Id { get; init; }
+
     [Required, MaxLength(64)]
     public string Username { get; init; } = null!;
 

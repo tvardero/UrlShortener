@@ -1,0 +1,26 @@
+@model UrlCreateModel
+@{
+  ViewData["Title"] = "Create new Url";
+}
+<div class="card mt-5 mx-auto" style="max-width: 400px;">
+  <div class="card-body">
+    <form method="post">
+      <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+      <div class="row mb-3">
+        <label asp-for="DestinationUrl"></label>
+        <div class="col-sm-10">
+          <input asp-for="DestinationUrl" />
+          <span asp-validation-for="DestinationUrl" class="text-danger"></span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label asp-for="Expiration"></label>
+        <div class="col-sm-10">
+          <input asp-for="Expiration" />
+          <span asp-validation-for="Expiration" class="text-danger"></span>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary">Shorten!</button>
+    </form>
+  </div>
+</div>

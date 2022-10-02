@@ -12,7 +12,7 @@ public class AccountController : Controller
     }
 
     [HttpGet]
-    public IActionResult LogIn() => View();
+    public IActionResult LogIn(string? returnUrl) => View(new LoginModel() { ReturnUrl = returnUrl });
 
     [HttpPost]
     public async Task<IActionResult> LogIn(LoginModel model)
@@ -38,18 +38,18 @@ public class AccountController : Controller
             return View(model);
         }
 
-        return RedirectToRoute(model.ReturnUrl ?? "/");
+        return Redirect(model.ReturnUrl ?? "/");
     }
 
     [HttpPost]
     public async Task<IActionResult> LogOut()
     {
         await _signInManager.SignOutAsync();
-        return RedirectToRoute("/");
+        return Redirect("/");
     }
 
     [HttpGet]
-    public IActionResult Register() => View();
+    public IActionResult Register(string? returnUrl) => View(new RegisterModel() { ReturnUrl = returnUrl });
 
     [HttpPost]
     public async Task<IActionResult> Register(RegisterModel model)
@@ -77,7 +77,7 @@ public class AccountController : Controller
 
         await _signInManager.SignInAsync(user, model.RememberMe);
 
-        return RedirectToRoute(model.ReturnUrl ?? "/");
+        return Redirect(model.ReturnUrl ?? "/");
     }
 
     [Authorize]
@@ -96,7 +96,7 @@ public class AccountController : Controller
             return View(model);
         }
 
-        return RedirectToRoute("/");
+        return Redirect("/");
     }
 
     private readonly SignInManager<User> _signInManager;

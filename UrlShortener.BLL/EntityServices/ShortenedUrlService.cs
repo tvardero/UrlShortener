@@ -50,6 +50,7 @@ public class ShortenedUrlService : EFEntityServiceBase<ShortenedUrl, string>
     /// <returns>Створена сутність.</returns>
     public ShortenedUrl GenerateEntity(User user, string destinationUrl, TimeSpan expirationTime)
     {
+        _ctx.Attach(user);
         return GenerateEntityAsync(user, destinationUrl, expirationTime).Result;
     }
 

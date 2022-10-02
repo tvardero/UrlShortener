@@ -86,7 +86,7 @@
         {
             "label": "watch",
             "command": "dotnet",
-            "type": "process",
+            "type": "shell",
             "args": [
                 "watch",
                 "run",

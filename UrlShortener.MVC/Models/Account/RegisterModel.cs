@@ -5,7 +5,7 @@ public class RegisterModel
     [Required, MaxLength(64)]
     public string Username { get; init; } = null!;
 
-    [Required]
+    [Required, DataType(DataType.Password)]
     public string Password { get; init; } = null!;
 
     public bool RememberMe { get; init; } = false;
@@ -16,5 +16,6 @@ public class RegisterModel
     [Required, MaxLength(32), Phone]
     public string PhoneNumber { get; init; } = null!;
 
+    [HiddenInput]
     public string? ReturnUrl { get; init; }
 }

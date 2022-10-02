@@ -1,4 +1,34 @@
+@model LoginModel
 @{
-    ViewData["Title"] = "Login";
+  ViewData["Title"] = "Login";
 }
-login
+<div class="card mt-5 mx-auto" style="max-width: 400px;">
+  <div class="card-body">
+    <form method="post">
+      <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+      <div class="row mb-3">
+        <label asp-for="Username"></label>
+        <div class="col-sm-10">
+          <input asp-for="Username" />
+          <span asp-validation-for="Username" class="text-danger"></span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label asp-for="Password"></label>
+        <div class="col-sm-10">
+          <input asp-for="Password" />
+          <span asp-validation-for="Password" class="text-danger"></span>
+        </div>
+      </div>
+      <div class="row mb-3">
+        <label asp-for="RememberMe"></label>
+        <div class="col-sm-10">
+          <input asp-for="RememberMe" />
+        </div>
+      </div>
+      <input asp-for="ReturnUrl" />
+      <button type="submit" class="btn btn-primary">Log in</button>
+      <a class="btn btn-outline-secondary" asp-action="Register" asp-route-ReturnUrl="@Model.ReturnUrl">I need new account</a>
+    </form>
+  </div>
+</div>

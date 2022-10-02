@@ -11,7 +11,6 @@ public class RedirectController : Controller
         _cache = cache;
     }
 
-    // [HttpGet]
     public async Task<IActionResult> RedirectToDestination(string hash)
     {
         if (!_cache.TryGetValue(hash, out ShortenedUrl? shortened))
@@ -22,7 +21,13 @@ public class RedirectController : Controller
                 _cache.Set(hash, shortened, shortened.ExpiredAtUtc);
         }
 
-        return shortened != null ? RedirectPermanent(shortened.DestinationUrl) : View("NotFound");
+        if (shortened == null)
+        {
+            Response.StatusCode = 404;
+            return View("NotFound");
+        }
+
+        return RedirectPermanent(shortened.DestinationUrl);
     }
 
     private readonly ShortenedUrlService _service;

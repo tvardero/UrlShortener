@@ -1,6 +1,3 @@
-using JavaScriptEngineSwitcher.Extensions.MsDependencyInjection;
-using JavaScriptEngineSwitcher.V8;
-using React.AspNet;
 using UrlShortener.BLL;
 using UrlShortener.BLL.CustomServices;
 using UrlShortener.DataAccess;
@@ -42,6 +39,7 @@ internal class Program
         app.UseStaticFiles();
         app.UseRouting();
 
+        app.UseAuthentication();
         app.UseAuthorization();
 
         app.MapControllerRoute(

@@ -47,8 +47,7 @@ public static class AspNetCoreExtensions
             o.User.RequireUniqueEmail = true;
         })
             .AddEntityFrameworkStores<AppDbContext>()
-            .AddRoles<Role>()
-            .AddDefaultTokenProviders();
+            .AddRoles<Role>();
 
         builder.Services.ConfigureApplicationCookie(o =>
         {
@@ -57,6 +56,8 @@ public static class AspNetCoreExtensions
             o.Cookie.SecurePolicy = Microsoft.AspNetCore.Http.CookieSecurePolicy.SameAsRequest;
 
             o.ExpireTimeSpan = TimeSpan.FromDays(1);
+
+            o.AccessDeniedPath = "/";
         });
 
         return builder;

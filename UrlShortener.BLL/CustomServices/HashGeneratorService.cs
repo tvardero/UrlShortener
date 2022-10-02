@@ -2,7 +2,7 @@ namespace UrlShortener.BLL.CustomServices;
 
 public class HashGeneratorService
 {
-    public const string Alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_=";
+    public const string Alphabet = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_+";
     public const int HashLength = 7;
     public const ulong PrimeNumber = 518973461827;
 

@@ -7,4 +7,5 @@ public class UrlModel
     public string? Username { get; init; }
     public DateTime CreatedAtUtc { get; init; }
     public DateTime ExpiredAtUtc { get; init; }
+    public bool CanDelete { get; set; }
 }
